@@ -1,6 +1,7 @@
 package br.com.apollo.core.domain;
 
 import br.com.apollo.dataprovider.repository.entity.AddressEntity;
+import br.com.apollo.entrypoint.controller.response.AddressResponse;
 
 public class Address {
 
@@ -33,5 +34,9 @@ public class Address {
 
     public AddressEntity toEntity() {
         return new AddressEntity(street, city, state);
+    }
+
+    public AddressResponse toResponse() {
+        return new AddressResponse(street, city, state);
     }
 }

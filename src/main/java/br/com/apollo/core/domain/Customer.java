@@ -1,6 +1,7 @@
 package br.com.apollo.core.domain;
 
 import br.com.apollo.dataprovider.repository.entity.CustomerEntity;
+import br.com.apollo.entrypoint.controller.response.CustomerResponse;
 
 public class Customer {
 
@@ -60,5 +61,9 @@ public class Customer {
 
     public CustomerEntity toEntity() {
         return new CustomerEntity(id, name, cpf, isValidCpf, address.toEntity());
+    }
+
+    public CustomerResponse toResponse() {
+        return new CustomerResponse(name, cpf, isValidCpf, address.toResponse());
     }
 }

@@ -1,5 +1,6 @@
 package br.com.apollo.dataprovider.repository.entity;
 
+import br.com.apollo.core.domain.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -20,4 +21,8 @@ public class CustomerEntity {
     private Boolean isValidCpf;
 
     private AddressEntity address;
+
+    public Customer toDomain() {
+        return new Customer(id, name, cpf, isValidCpf, address.toDomain());
+    }
 }
