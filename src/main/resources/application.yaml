@@ -1,0 +1,9 @@
+apollo:
+  client:
+    address:
+      url: http://localhost:8082/addresses
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongoadmin:secret@localhost:27017
