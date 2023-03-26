@@ -1,6 +1,7 @@
 package br.com.apollo.entrypoint.controller;
 
 import br.com.apollo.core.domain.Customer;
+import br.com.apollo.core.usecase.DeleteCustomerByIdUseCase;
 import br.com.apollo.core.usecase.FindCustomerByIdUseCase;
 import br.com.apollo.core.usecase.InsertCustomerUseCase;
 import br.com.apollo.core.usecase.UpdateCustomerUseCase;
@@ -21,12 +22,16 @@ public class CustomerController {
 
     private final UpdateCustomerUseCase updateCustomerUseCase;
 
+    private final DeleteCustomerByIdUseCase deleteCustomerByIdUseCase;
+
     public CustomerController(InsertCustomerUseCase insertCustomerUseCase,
                               FindCustomerByIdUseCase findCustomerByIdUseCase,
-                              UpdateCustomerUseCase updateCustomerUseCase) {
+                              UpdateCustomerUseCase updateCustomerUseCase,
+                              DeleteCustomerByIdUseCase deleteCustomerByIdUseCase) {
         this.insertCustomerUseCase = insertCustomerUseCase;
         this.findCustomerByIdUseCase = findCustomerByIdUseCase;
         this.updateCustomerUseCase = updateCustomerUseCase;
+        this.deleteCustomerByIdUseCase = deleteCustomerByIdUseCase;
     }
 
     @PostMapping
@@ -47,10 +52,16 @@ public class CustomerController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<Void> update(@PathVariable("id") final String id,
                                        @Valid @RequestBody CustomerRequest customerRequest) {
-        Customer customer = findCustomerByIdUseCase.find(id);
+        Customer customer = customerRequest.toDomain();
         customer.setId(id);
         updateCustomerUseCase.update(customer, customerRequest.getZipCode());
 
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") final String id) {
+        deleteCustomerByIdUseCase.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
