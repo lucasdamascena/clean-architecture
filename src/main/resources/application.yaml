@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 apollo:
   client:
     address:
@@ -6,4 +9,9 @@ apollo:
 spring:
   data:
     mongodb:
-      uri: mongodb://mongoadmin:secret@localhost:27017
+      host: localhost
+      port: 27017
+      authentication-database: admin
+      username: root
+      password: example
+      database: cleanarch

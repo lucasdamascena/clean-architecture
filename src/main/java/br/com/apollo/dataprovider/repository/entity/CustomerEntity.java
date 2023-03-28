@@ -23,6 +23,11 @@ public class CustomerEntity {
     private AddressEntity address;
 
     public Customer toDomain() {
+
+        if (isValidCpf == null) {
+            isValidCpf = false;
+        }
+
         return new Customer(id, name, cpf, isValidCpf, address.toDomain());
     }
 }

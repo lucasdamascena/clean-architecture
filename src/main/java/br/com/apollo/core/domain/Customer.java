@@ -51,7 +51,7 @@ public class Customer {
         return cpf;
     }
 
-    public Boolean getValidCpf() {
+    public Boolean getIsValidCpf() {
         return isValidCpf;
     }
 
